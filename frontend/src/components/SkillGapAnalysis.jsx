@@ -1,14 +1,6 @@
 import { Brain, TrendingUp, AlertCircle, BookOpen, CheckCircle } from 'lucide-react';
 
-interface SkillGap {
-  skill: string;
-  currentLevel: number;
-  targetLevel: number;
-  priority: 'high' | 'medium' | 'low';
-  recommendation: string;
-}
-
-const skillGaps: SkillGap[] = [
+const skillGaps = [
   {
     skill: 'TypeScript',
     currentLevel: 0,
@@ -74,7 +66,7 @@ const learningResources = [
 ];
 
 export function SkillGapAnalysis() {
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority) => {
     switch (priority) {
       case 'high':
         return 'bg-red-100 text-red-700';

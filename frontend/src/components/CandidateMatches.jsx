@@ -1,26 +1,7 @@
-// @ts-nocheck
 import { useState } from 'react';
 import { Star, Mail, Phone, MapPin, Award, Briefcase } from 'lucide-react';
-import type { JobPosting } from '../App';
 
-interface Candidate {
-  id: string;
-  name: string;
-  title: string;
-  location: string;
-  email: string;
-  phone: string;
-  skills: string[];
-  experience: string;
-  matchScore: number;
-  appliedTo: string;
-}
-
-interface CandidateMatchesProps {
-  jobs: JobPosting[];
-}
-
-const mockCandidates: Candidate[] = [
+const mockCandidates = [
   {
     id: '1',
     name: 'Alex Johnson',
@@ -83,13 +64,13 @@ const mockCandidates: Candidate[] = [
   },
 ];
 
-export function CandidateMatches({ jobs }: CandidateMatchesProps) {
-  const [selectedJob, setSelectedJob] = useState<string>(jobs[0]?.id || '');
-  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
+export function CandidateMatches({ jobs }) {
+  const [selectedJob, setSelectedJob] = useState(jobs[0]?.id || '');
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
 
   const candidates = mockCandidates.filter(c => c.appliedTo === selectedJob);
 
-  const getMatchColor = (score: number) => {
+  const getMatchColor = (score) => {
     if (score >= 85) return 'text-green-600 bg-green-50';
     if (score >= 70) return 'text-yellow-600 bg-yellow-50';
     return 'text-gray-600 bg-gray-50';
@@ -207,7 +188,7 @@ export function CandidateMatches({ jobs }: CandidateMatchesProps) {
                   <button className="flex-1 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:shadow-lg transition-all text-sm">
                     Contact Candidate
                   </button>
-                  <button className="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                  <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm">
                     View Profile
                   </button>
                 </div>

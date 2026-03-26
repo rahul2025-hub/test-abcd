@@ -1,15 +1,8 @@
 import { useState } from 'react';
 import { Brain, Mail, Lock, Eye, EyeOff, UserCircle, Briefcase, ArrowLeft } from 'lucide-react';
-import { UserType } from '../App';
 
-interface LoginPageProps {
-  onLogin: (type: UserType, name: string, email: string) => void;
-  onBackToLanding: () => void;
-  initialUserType?: UserType;
-}
-
-export function LoginPage({ onLogin, onBackToLanding, initialUserType = null }: LoginPageProps) {
-  const [userType, setUserType] = useState<UserType>(initialUserType);
+export function LoginPage({ onLogin, onBackToLanding, initialUserType = null }) {
+  const [userType, setUserType] = useState(initialUserType);
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -28,7 +21,7 @@ export function LoginPage({ onLogin, onBackToLanding, initialUserType = null }: 
     confirmPassword: '',
   });
 
-  const validateEmail = (email: string) => {
+  const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
@@ -65,7 +58,7 @@ export function LoginPage({ onLogin, onBackToLanding, initialUserType = null }: 
     return !Object.values(newErrors).some(error => error !== '');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     if (validateForm() && userType) {
@@ -74,7 +67,7 @@ export function LoginPage({ onLogin, onBackToLanding, initialUserType = null }: 
     }
   };
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     setErrors(prev => ({ ...prev, [field]: '' }));
   };

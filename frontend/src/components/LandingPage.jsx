@@ -1,12 +1,7 @@
 import { Brain, Briefcase, Users, TrendingUp, Target, Sparkles } from 'lucide-react';
-import { UserType } from '../App';
 
-interface LandingPageProps {
-  onUserTypeSelect: (type: UserType, name: string) => void;
-}
-
-export function LandingPage({ onUserTypeSelect }: LandingPageProps) {
-  const handleGetStarted = (type: UserType) => {
+export function LandingPage({ onUserTypeSelect }) {
+  const handleGetStarted = (type) => {
     onUserTypeSelect(type, '');
   };
 

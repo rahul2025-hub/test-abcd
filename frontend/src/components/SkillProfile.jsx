@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Plus, X, Award, Sparkles } from 'lucide-react';
-import { Skill } from '../App';
 
-const initialSkills: Skill[] = [
+const initialSkills = [
   { name: 'JavaScript', level: 85, category: 'Programming' },
   { name: 'React', level: 80, category: 'Frontend' },
   { name: 'Python', level: 70, category: 'Programming' },
@@ -12,39 +11,10 @@ const initialSkills: Skill[] = [
 ];
 
 export function SkillProfile() {
-  const [skills, setSkills] = useState<Skill[]>(initialSkills);
+  const [skills, setSkills] = useState(initialSkills);
   const [showAddSkill, setShowAddSkill] = useState(false);
   const [newSkill, setNewSkill] = useState({ name: '', level: 50, category: 'Programming' });
 
-  const getCategoryAccentClass = (category: string) => {
-    switch (category) {
-      case 'Programming':
-        return 'text-purple-700';
-      case 'Frontend':
-        return 'text-pink-600';
-      case 'Database':
-        return 'text-sky-600';
-      case 'Tools':
-        return 'text-amber-600';
-      default:
-        return 'text-gray-900';
-    }
-  };
-
-  const getCategoryBadgeBg = (category: string) => {
-    switch (category) {
-      case 'Programming':
-        return 'bg-purple-100 text-purple-700';
-      case 'Frontend':
-        return 'bg-pink-100 text-pink-600';
-      case 'Database':
-        return 'bg-sky-100 text-sky-600';
-      case 'Tools':
-        return 'bg-amber-100 text-amber-700';
-      default:
-        return 'bg-gray-100 text-gray-700';
-    }
-  }
   const handleAddSkill = () => {
     if (newSkill.name.trim()) {
       setSkills([...skills, { ...newSkill, name: newSkill.name.trim() }]);
@@ -53,7 +23,7 @@ export function SkillProfile() {
     }
   };
 
-  const handleRemoveSkill = (skillName: string) => {
+  const handleRemoveSkill = (skillName) => {
     setSkills(skills.filter(s => s.name !== skillName));
   };
 
@@ -154,21 +124,21 @@ export function SkillProfile() {
 
         {/* Skills by Category */}
         {categories.map(category => (
-          <div key={category} className="mb-8 last:mb-0">
-            <h3 className={`mb-3 font-semibold ${getCategoryAccentClass(category)}`}>{category}</h3>
-            <div className="space-y-4">
+          <div key={category} className="mb-6 last:mb-0">
+            <h3 className="text-gray-900 mb-3">{category}</h3>
+            <div className="space-y-3">
               {skills
                 .filter(skill => skill.category === category)
                 .map(skill => (
-                  <div key={skill.name} className="flex items-center gap-4 p-2 rounded-lg hover:bg-gray-50 transition-all">
+                  <div key={skill.name} className="flex items-center gap-4">
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-gray-800 font-medium">{skill.name}</span>
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium ${getCategoryBadgeBg(category)}`}>{skill.level}%</span>
+                        <span className="text-gray-700">{skill.name}</span>
+                        <span className="text-sm text-gray-500">{skill.level}%</span>
                       </div>
-                      <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-500 ease-out rounded-full"
+                          className="h-full bg-gradient-to-r from-purple-600 to-pink-600 transition-all"
                           style={{ width: `${skill.level}%` }}
                         />
                       </div>

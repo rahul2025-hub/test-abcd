@@ -1,7 +1,6 @@
-import { TrendingUp, ArrowRight, DollarSign, Clock, Target, Zap, Cpu, Server, Users, Shield, Cloud } from 'lucide-react';
-import { CareerPath } from '../App';
+import { TrendingUp, ArrowRight, DollarSign, Clock, Target } from 'lucide-react';
 
-const careerPaths: CareerPath[] = [
+const careerPaths = [
   {
     role: 'Senior Full Stack Developer',
     level: 'Next Step (6-12 months)',
@@ -52,44 +51,6 @@ const alternativePaths = [
     skills: ['Kubernetes', 'CI/CD', 'Infrastructure as Code', 'Monitoring'],
   },
 ];
-
-// Helper functions for alternative paths styling
-const getAlternativePathIcon = (index: number) => {
-  const icons = [
-    <Zap key="zap" className="w-5 h-5 text-purple-700" />,
-    <Cpu key="cpu" className="w-5 h-5 text-blue-700" />,
-    <Server key="server" className="w-5 h-5 text-amber-700" />,
-  ];
-  return icons[index] || icons[0];
-};
-
-const getAlternativePathGradient = (index: number) => {
-  const gradients = [
-    'linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(236, 72, 153, 0.08) 100%)',
-    'linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%)',
-    'linear-gradient(135deg, rgba(217, 119, 6, 0.08) 0%, rgba(251, 146, 60, 0.08) 100%)',
-  ];
-  return gradients[index] || gradients[0];
-};
-
-const getAlternativePathCardClass = (index: number) => {
-  return 'bg-white rounded-xl p-6 border border-gray-200/50 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300';
-};
-
-const getAlternativePathIconBg = (index: number) => {
-  const backgrounds = ['bg-purple-100', 'bg-blue-100', 'bg-amber-100'];
-  return backgrounds[index] || backgrounds[0];
-};
-
-const getAlternativePathBadgeBg = (index: number) => {
-  const backgrounds = ['bg-purple-100', 'bg-blue-100', 'bg-amber-100'];
-  return backgrounds[index] || backgrounds[0];
-};
-
-const getAlternativePathTextColor = (index: number) => {
-  const colors = ['text-purple-700', 'text-blue-700', 'text-amber-700'];
-  return colors[index] || colors[0];
-};
 
 export function CareerPathView() {
   return (
@@ -182,25 +143,17 @@ export function CareerPathView() {
         </p>
         <div className="grid md:grid-cols-3 gap-4">
           {alternativePaths.map((alt, index) => (
-            <div key={index} className={getAlternativePathCardClass(index)} style={{ background: getAlternativePathGradient(index) }}>
-              <div className="flex items-start gap-3 mb-4">
-                <div className={`p-2.5 rounded-lg ${getAlternativePathIconBg(index)}`}>
-                  {getAlternativePathIcon(index)}
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900 leading-tight">{alt.title}</h4>
+            <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <h4 className="text-gray-900 mb-2">{alt.title}</h4>
+              <p className="text-sm text-gray-600 mb-3">{alt.description}</p>
+              <div className="flex items-center gap-2 text-green-600 mb-3">
+                <DollarSign className="w-4 h-4" />
+                <span className="text-sm">{alt.salary}</span>
               </div>
-
-              <p className="text-gray-600 text-sm mb-4 line-clamp-2">{alt.description}</p>
-
-              <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 ${getAlternativePathBadgeBg(index)}`}>
-                <DollarSign className={`w-4 h-4 ${getAlternativePathTextColor(index)}`} />
-                <span className={`text-sm font-semibold ${getAlternativePathTextColor(index)}`}>{alt.salary}</span>
-              </div>
-
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {alt.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="flex items-center gap-2 text-gray-600">
-                    <ArrowRight className="w-3 h-3 text-gray-400 flex-shrink-0" />
+                  <div key={skillIndex} className="flex items-center gap-2 text-sm text-gray-600">
+                    <ArrowRight className="w-3 h-3" />
                     <span>{skill}</span>
                   </div>
                 ))}
@@ -247,5 +200,3 @@ export function CareerPathView() {
     </div>
   );
 }
-
-

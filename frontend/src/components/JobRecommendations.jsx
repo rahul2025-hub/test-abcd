@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { MapPin, Briefcase, DollarSign, TrendingUp, Star, ExternalLink } from 'lucide-react';
-import { JobPosting } from '../App';
 
-const recommendedJobs: JobPosting[] = [
+const recommendedJobs = [
   {
     id: '1',
     title: 'Senior Full Stack Developer',
@@ -84,14 +83,14 @@ const recommendedJobs: JobPosting[] = [
 ];
 
 export function JobRecommendations() {
-  const [selectedJob, setSelectedJob] = useState<JobPosting | null>(null);
-  const [filter, setFilter] = useState<'all' | 'high-match'>('all');
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [filter, setFilter] = useState('all');
 
   const filteredJobs = filter === 'high-match' 
     ? recommendedJobs.filter(job => (job.matchScore || 0) >= 80)
     : recommendedJobs;
 
-  const getMatchColor = (score: number) => {
+  const getMatchColor = (score) => {
     if (score >= 85) return 'text-green-600 bg-green-50';
     if (score >= 70) return 'text-yellow-600 bg-yellow-50';
     return 'text-gray-600 bg-gray-50';

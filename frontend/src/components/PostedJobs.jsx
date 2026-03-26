@@ -1,12 +1,6 @@
 import { MapPin, Briefcase, DollarSign, Trash2, Users } from 'lucide-react';
-import { JobPosting } from '../App';
 
-interface PostedJobsProps {
-  jobs: JobPosting[];
-  onDeleteJob: (jobId: string) => void;
-}
-
-export function PostedJobs({ jobs, onDeleteJob }: PostedJobsProps) {
+export function PostedJobs({ jobs, onDeleteJob }) {
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-xl p-6 shadow-sm">
